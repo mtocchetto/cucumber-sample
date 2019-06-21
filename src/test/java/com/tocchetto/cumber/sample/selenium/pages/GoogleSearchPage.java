@@ -15,25 +15,22 @@ public class GoogleSearchPage extends WebDriverPage implements SearchPage {
 
 	@FindBy(name = "q")
 	private WebElement searchBox;
-	
+
 	@FindBy(css = "#search a h3")
 	private List<WebElement> searchResults;
-	
+
 	public void open() {
 		getDriver().get("https://www.google.com");
 	}
-	
+
 	public void search(String input) {
 		searchBox.sendKeys(input);
 		searchBox.submit();
-		new WebDriverWait(getDriver(), 10)
-			.until(ExpectedConditions.titleContains(input));
+		new WebDriverWait(getDriver(), 10).until(ExpectedConditions.titleContains(input));
 	}
 
 	public List<String> viewResults() {
-		return searchResults.stream()
-				.map(element -> element.getText())
-				.collect(Collectors.toList());
+		return searchResults.stream().map(element -> element.getText()).collect(Collectors.toList());
 	}
 
 }
