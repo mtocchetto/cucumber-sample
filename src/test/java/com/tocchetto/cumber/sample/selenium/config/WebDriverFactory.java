@@ -14,19 +14,20 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  */
 public class WebDriverFactory {
 
-	@Produces @Singleton
+	@Produces
+	@Singleton
 	public WebDriver createWebDriver() {
-        String browser = System.getProperty("browser", "firefox");
-        switch(browser) {
-            case "firefox":
-                return new FirefoxDriver();
-            case "chrome":
-                return new ChromeDriver();
-            default:
-                throw new RuntimeException("Unsupported browser: " + browser);
-        }
-    }
-	
+		String browser = System.getProperty("browser", "firefox");
+		switch (browser) {
+		case "firefox":
+			return new FirefoxDriver();
+		case "chrome":
+			return new ChromeDriver();
+		default:
+			throw new RuntimeException("Unsupported browser: " + browser);
+		}
+	}
+
 	public void close(@Disposes WebDriver driver) {
 		driver.quit();
 	}
